@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 getMovie();
                 getMovie1();
+                /*将请求过程进行封装*/
                 getMovie2();
             }
         });

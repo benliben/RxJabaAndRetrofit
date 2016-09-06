@@ -2,6 +2,7 @@ package cn.kiwano.benben.rxjabaandretrofit.utils;
 
 import java.util.concurrent.TimeUnit;
 
+import cn.kiwano.benben.rxjabaandretrofit.http.HttpResult;
 import cn.kiwano.benben.rxjabaandretrofit.model.MovieModel;
 import cn.kiwano.benben.rxjabaandretrofit.service.MoveService;
 import okhttp3.OkHttpClient;
@@ -10,6 +11,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -57,5 +59,14 @@ public class HttpUtil {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
 
+    }
+
+    private class HttpResultFunc<T> implements Func1<HttpResult<T>,T>{
+
+        @Override
+        public T call(HttpResult<T> httpResult) {
+
+            return null;
+        }
     }
 }
