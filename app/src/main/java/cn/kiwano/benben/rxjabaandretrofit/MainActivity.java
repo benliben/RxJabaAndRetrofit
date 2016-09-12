@@ -2,18 +2,24 @@ package cn.kiwano.benben.rxjabaandretrofit;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import javax.security.auth.Subject;
+
 import cn.kiwano.benben.rxjabaandretrofit.model.MovieModel;
+import cn.kiwano.benben.rxjabaandretrofit.rxjabaretrofit.entity.SubjectPost;
+import cn.kiwano.benben.rxjabaandretrofit.rxjabaretrofit.listener.HttpOnNextListener;
+import cn.kiwano.benben.rxjabaandretrofit.rxjabaretrofit.subscribers.ProgressSubscriber;
 import cn.kiwano.benben.rxjabaandretrofit.service.MoveService;
 import cn.kiwano.benben.rxjabaandretrofit.utils.HttpUtil;
+import cn.kiwano.benben.rxjabaandretrofit.rxjabaretrofit.RetrofitUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,89 +47,30 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getMovie();
-                getMovie1();
-                /*将请求过程进行封装*/
-                getMovie2();
+                getMovie3();
             }
         });
     }
 
 
-    public void getMovie() {
-        String baseUrl = "http://op.juhe.cn/onebox/movie/";
 
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        MoveService moveService = retrofit.create(MoveService.class);
-        Call<MovieModel> call = moveService.getToMovie("593952e8101d489ddef22d152d6d41c0", "谍影重重4");
-        call.enqueue(new Callback<MovieModel>() {
-            @Override
-            public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
-               mContent.setText(response.body().toString());
-            }
 
-            @Override
-            public void onFailure(Call<MovieModel> call, Throwable t) {
-                mContent.setText(t.getMessage());
-            }
-        });
 
+
+    /*完美简化版*/
+    public void getMovie3() {
+        SubjectPost postEntity = new SubjectPost(new ProgressSubscriber(simpleOnNextListener, this), true);
+        RetrofitUtils manager = RetrofitUtils.getInstance();
+        manager.doHttpDeal(postEntity);
     }
 
-    public void getMovie1() {
-        String baseUrl = "http://op.juhe.cn/onebox/movie/";
-
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-
-        final MoveService moveService = retrofit.create(MoveService.class);
-
-        moveService.getToMovie2("593952e8101d489ddef22d152d6d41c0", "谍影重重4")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MovieModel>() {
-                    @Override
-                    public void onCompleted() {
-                        Toast.makeText(MainActivity.this,"Get Top Movie",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mContent.setText(e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(MovieModel movieModel) {
-                        mContent.setText(movieModel.toString());
-                    }
-                });
-    }
-
-    public void getMovie2() {
-        Subscriber subscriber = new Subscriber<MovieModel>(){
-
-            @Override
-            public void onCompleted() {
-                Toast.makeText(MainActivity.this,"Get Top Movie",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                mContent.setText(e.getMessage());
-            }
-
-            @Override
-            public void onNext(MovieModel movieModel) {
-                mContent.setText(movieModel.toString());
-            }
-        };
-        HttpUtil.getInstance().getToMovie(subscriber,"593952e8101d489ddef22d152d6d41c0", "谍影重重4");
-    }
+    HttpOnNextListener simpleOnNextListener = new HttpOnNextListener<MovieModel.ResultBean>() {
+        @Override
+        public void onNext(MovieModel.ResultBean resultBean) {
+            mContent.setText("已封装:\n"+resultBean.getAct()+"\n"+resultBean.getAct_s()+
+                    "\n"+resultBean.getYear()+"\n"+resultBean.getVdo_status()+
+                    "\n"+resultBean.getTitle()+"\n"+resultBean.getDesc());
+        }
+    };
 }

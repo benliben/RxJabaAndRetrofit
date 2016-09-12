@@ -5,5 +5,6 @@ package cn.kiwano.benben.rxjabaandretrofit;
  * Desribe:
  */
 public class Constant {
-
+    public static final String BASE_URL = "http://op.juhe.cn/onebox/movie/";
+    public static final String KEY = "593952e8101d489ddef22d152d6d41c0";
 }

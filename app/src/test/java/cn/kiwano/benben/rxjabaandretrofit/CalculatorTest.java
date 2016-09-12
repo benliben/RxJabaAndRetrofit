@@ -28,12 +28,13 @@ public class CalculatorTest {
 
     @Test
     public void testDivide() throws Exception {
-        assertEquals(10d, mCalculator.multiply(2d, 5d), 0);
+        assertEquals(4d, mCalculator.divide(20d, 5d), 0);
 
     }
 
     @Test
     public void testMultiply() throws Exception {
-        assertEquals(4d, mCalculator.divide(20d, 5d), 0);
+//        assertEquals(10d, mCalculator.multiply(2d, 5d), 0);
+        assertEquals(25,mCalculator.multiply(5,5),0);
     }
 }

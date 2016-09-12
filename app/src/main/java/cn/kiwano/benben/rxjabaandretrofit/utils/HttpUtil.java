@@ -2,6 +2,7 @@ package cn.kiwano.benben.rxjabaandretrofit.utils;
 
 import java.util.concurrent.TimeUnit;
 
+import cn.kiwano.benben.rxjabaandretrofit.Constant;
 import cn.kiwano.benben.rxjabaandretrofit.http.HttpResult;
 import cn.kiwano.benben.rxjabaandretrofit.model.MovieModel;
 import cn.kiwano.benben.rxjabaandretrofit.service.MoveService;
@@ -19,7 +20,7 @@ import rx.schedulers.Schedulers;
  * Desribe:
  */
 public class HttpUtil {
-    public static final String BASE_URL = "http://op.juhe.cn/onebox/movie/";
+    public static final String BASE_URL = Constant.BASE_URL;
     public static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -52,14 +53,24 @@ public class HttpUtil {
         return singletonHolder.INSTANCE;
     }
 
-    public void getToMovie(Subscriber<MovieModel> subscriber, String key, String name) {
-        moveService.getToMovie2(key, name)
+//    public void getToMovie(Subscriber<MovieModel> subscriber, String key, String name) {
+//        moveService.getToMovie2(key, name)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(subscriber);
+//
+//    }
+
+    public void getToMovie2(Subscriber<MovieModel> subscriber, String key, String name, int size) {
+        moveService.getToMovie3(key, name, size)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
-
     }
+
+
 
     private class HttpResultFunc<T> implements Func1<HttpResult<T>,T>{
 
