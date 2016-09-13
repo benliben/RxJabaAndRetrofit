@@ -1,7 +1,7 @@
 package cn.kiwano.benben.rxjabaandretrofit.service;
 
 import cn.kiwano.benben.rxjabaandretrofit.model.MovieModel;
-import cn.kiwano.benben.rxjabaandretrofit.rxjabaretrofit.entity.BaseResultEntity;
+import cn.kiwano.benben.rxjavaaddretrofit.entity.BaseResultEntity;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -19,7 +19,7 @@ public interface MoveService {
 
     @GET("video")
     Observable<BaseResultEntity<MovieModel.ResultBean>> getToMovie2(@Query("key") String key,
-                                                        @Query("q") String q);
+                                                                    @Query("q") String q);
 
     @GET("void")
     Observable<MovieModel> getToMovie3(@Query("key") String key,

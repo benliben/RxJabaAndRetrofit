@@ -69,12 +69,21 @@ public class MovieModel {
         private String desc;
         private String cover;
         private String vdo_status;
+
+        @Override
+        public String toString() {
+            return "电影名称："+title+" 主演"+act;
+        }
+
         /**
          * levp :
          * qiyi :
          * imgo :
          * qq :
          */
+
+
+
 
         private PlaylinksBean playlinks;
         /**
