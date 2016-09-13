@@ -3,7 +3,6 @@ package cn.kiwano.benben.rxjavaaddretrofit.http;
 import java.util.concurrent.TimeUnit;
 
 import cn.kiwano.benben.rxjabaandretrofit.Constant;
-import cn.kiwano.benben.rxjabaandretrofit.model.MovieModel;
 import cn.kiwano.benben.rxjavaaddretrofit.entity.BaseEntity;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

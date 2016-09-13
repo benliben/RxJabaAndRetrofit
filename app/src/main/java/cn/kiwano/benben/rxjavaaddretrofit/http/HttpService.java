@@ -1,6 +1,6 @@
 package cn.kiwano.benben.rxjavaaddretrofit.http;
 
-import cn.kiwano.benben.rxjabaandretrofit.model.MovieModel;
+import cn.kiwano.benben.rxjabaandretrofit.MovieModel;
 import cn.kiwano.benben.rxjavaaddretrofit.entity.BaseResultEntity;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

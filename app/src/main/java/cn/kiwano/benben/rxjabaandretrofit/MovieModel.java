@@ -1,4 +1,4 @@
-package cn.kiwano.benben.rxjabaandretrofit.model;
+package cn.kiwano.benben.rxjabaandretrofit;
 
 import java.util.List;
 

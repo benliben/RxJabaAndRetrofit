@@ -13,7 +13,7 @@ import butterknife.OnClick;
 import cn.kiwano.benben.rxjabaandretrofit.Constant;
 import cn.kiwano.benben.rxjabaandretrofit.R;
 
-import cn.kiwano.benben.rxjabaandretrofit.model.MovieModel;
+import cn.kiwano.benben.rxjabaandretrofit.MovieModel;
 import cn.kiwano.benben.rxjavaaddretrofit.entity.SubjectPost;
 import cn.kiwano.benben.rxjavaaddretrofit.http.HttpManager;
 import cn.kiwano.benben.rxjavaaddretrofit.listener.HttpOnNextListener;
